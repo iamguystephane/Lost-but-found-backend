@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   api:
@@ -6,8 +6,8 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/lostbutfound
-      - JWT_SECRET=your_secret_key
+      - MONGO_URI=mongodb://localhost:27017/lost-but-found
+      - JWT_SECRET=3469670a2ec6bce338f392dac790a564bfab5239a177f72e7e919df5fefc42b9
     depends_on:
       - mongo
     restart: always
