@@ -7,7 +7,7 @@ connectMongoDB();
 
 app.get("/", (req, res) => {
   res.send(
-    "<h1> Testing automatic deployment </h1>"
+    "<h1> Testing </h1>"
   );
 });
 

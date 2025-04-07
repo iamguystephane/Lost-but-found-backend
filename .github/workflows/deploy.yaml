@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no -i /home/runner/.ssh/id_rsa stephane@51.38.185.29 << 'EOF'
-            cd /lost-but-found-backend || exit
+            cd lost-but-found-backend || exit
             git pull origin main || exit
             docker-compose down || exit
             docker-compose up -d || exit
