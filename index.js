@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const connectMongoDB = require("./app/scripts/connectMongoDB");
 const app = express();
 
 connectMongoDB();
 
 app.get("/", (req, res) => {
-  res.send(
-    "<ul><li> Games </li> <li> Coding </li> <li> Movies and Games </li></ul>"
-  );
+  res.send("Hello world!");
 });
 
 app.listen(5000, () => {
