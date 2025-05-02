@@ -1,0 +1,40 @@
+name: Run Tests and Check Coverage
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Enforce coverage threshold
+        run: |
+          COVERAGE=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('./coverage/coverage-summary.json')); console.log(data.total.statements.pct);")
+          echo "Coverage is $COVERAGE%"
+          REQUIRED=85
+          if (( $(echo "$COVERAGE < $REQUIRED" | bc -l) )); then
+            echo "❌ Test coverage is below $REQUIRED%"
+            exit 1
+          else
+            echo "✅ Test coverage is sufficient"
+          fi
