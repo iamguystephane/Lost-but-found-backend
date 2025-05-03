@@ -12,6 +12,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/protected", require("./routes/protected"));
 app.use("/api", require("./routes/loggedinUser"));
+app.use("/api", require("./routes/getItems"));
 
 app.get("/", (req, res) => {
   res.send("<h1> Hey there, welcome to our lost but found app ✌ </h1>");
