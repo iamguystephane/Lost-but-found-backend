@@ -5,9 +5,6 @@ services:
     build: .
     ports:
       - "5000:5000"
-    environment:
-      - MONGO_URI=mongodb://localhost:27017/lost-but-found
-      - JWT_SECRET=3469670a2ec6bce338f392dac790a564bfab5239a177f72e7e919df5fefc42b9
     env_file:
       - .env
     depends_on:
