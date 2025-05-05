@@ -1,16 +1,16 @@
 pipeline {
-    agent any
-
-    triggers {
-        pollSCM('* * * * *') // Poll SCM every minute (temporary for testing)
+    agent {
+        docker {
+            image 'node:lts'  // Official Node.js LTS image
+            args '-u root'    // Optional: Run as root to avoid permission issues
+        }
     }
-
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', 
                      url: 'https://github.com/iamguystephane/lost-but-found-backend.git',
-                     credentialsId: 'github-pat' // if private repo
+                     credentialsId: 'github-pat'
             }
         }
         stage('Install Dependencies') {
@@ -22,14 +22,6 @@ pipeline {
             steps {
                 sh 'npm test'
             }
-        }
-    }
-    post {
-        failure {
-            echo "Build failed!"
-        }
-        success {
-            echo "Build passed!"
         }
     }
 }
