@@ -12,9 +12,9 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/protected", require("./routes/protected"));
 app.use("/api", require("./routes/loggedinUser"));
-app.use("/api", require("./routes/getItems"));
-app.use("/api", require("./routes/post-items"));
+app.use("/api", require("./routes/get-lost-items"));
 app.use("/api", require("./routes/get-user-items"));
+app.use("/api", require("./routes/post-items"));
 app.get("/api", (req, res) => res.send("<h1> Found me </h1>"));
 
 app.get("/", (req, res) => {

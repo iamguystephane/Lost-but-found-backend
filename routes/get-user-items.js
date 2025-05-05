@@ -5,6 +5,7 @@ const auth = require("../middleware/auth");
 
 router.get("/get-items", auth, async (req, res) => {
   const userId = req.user?.id;
+  console.log("Getting user item for: ", userId)
   try {
     const items = await Item.find({ postedBy: userId });
     res.status(200).json(items);
