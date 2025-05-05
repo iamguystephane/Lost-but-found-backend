@@ -10,6 +10,7 @@ pipeline {
 
     environment {
         GIT_CREDENTIALS_ID = 'github-pat' // Make sure this matches your Jenkins credentials ID
+        COVERAGE_THRESHOLD = 85 // Set your coverage threshold here
     }
 
     stages {
@@ -32,7 +33,21 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'npm test' // or other test command
+                sh 'npm test -- --passWithNoTests' // or other test command
+            }
+        }
+        state('Check Coverage') {
+            steps {
+               script {
+                    // Assuming coverage is stored in coverage/coverage-summary.json
+                    def coverage = readJSON(file: 'coverage/coverage-summary.json')
+                    def totalCoverage = coverage.total.lines.pct
+
+                    echo "Total Coverage: ${totalCoverage}%"
+
+                    if (totalCoverage < env.COVERAGE_THRESHOLD.toInteger()) {
+                        error "Code coverage is below the threshold: ${totalCoverage}%"
+                    }
             }
         }
     }
