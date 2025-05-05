@@ -40,43 +40,19 @@ router.post("/login", async (req, res) => {
     );
     if (!passwordsMatch)
       return res.status(400).json({ message: "Incorrect password" });
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "7d",
-      }
-    );
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
     });
+    console.log("token created after login: ", token);
     const { password, __v, ...userData } = user.toObject(); // Exclude password and from the response
     return res.status(200).json({
       message: "login successful",
-      token,
+      token: token,
       user: userData,
     });
   } catch (err) {
     console.log("error: ", err);
     res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-router.post("/logout", async (req, res) => {
-  console.log("received data for logout: ", req.body);
-  try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
-    });
-    return res.status(200).json({ message: "logout successful" });
-  } catch (err) {
-    console.log("error: ", err);
-    res.status(500).json({ message: "Internal server error " });
   }
 });
 module.exports = router;
