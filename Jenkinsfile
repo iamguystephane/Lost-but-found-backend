@@ -2,23 +2,25 @@ pipeline {
     agent any
 
     triggers {
-        githubPush() // Optional; for webhook trigger
+        pollSCM('* * * * *') // Poll SCM every minute (temporary for testing)
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/iamguystephane/lost-but-found-backend.git'
+                git branch: 'main', 
+                     url: 'https://github.com/iamguystephane/lost-but-found-backend.git',
+                     credentialsId: 'github-pat' // if private repo
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install' // or composer install, pip install, etc.
+                sh 'npm install'
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'npm test' // or PHPUnit, pytest, etc.
+                sh 'npm test'
             }
         }
     }
