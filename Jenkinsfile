@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node-18' // Make sure this matches your NodeJS installation in Jenkins
+    }
     triggers {
         githubPush() // Optional: only works if GitHub webhook is configured
     }
