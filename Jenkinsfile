@@ -8,9 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/iamguystephane/lost-but-found-backend.git',
-                credentialsId: "github-pat",
+                git 'https://github.com/your-username/your-repo.git'
             }
         }
         stage('Install Dependencies') {
