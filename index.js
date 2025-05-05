@@ -14,6 +14,8 @@ app.use("/api/protected", require("./routes/protected"));
 app.use("/api", require("./routes/loggedinUser"));
 app.use("/api", require("./routes/getItems"));
 app.use("/api", require("./routes/post-items"));
+app.use("/api", require("./routes/get-user-items"));
+app.get("/api", (req, res) => res.send("<h1> Found me </h1>"));
 
 app.get("/", (req, res) => {
   res.send("<h1> Hey there, welcome to our lost but found app ✌ </h1>");

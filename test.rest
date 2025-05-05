@@ -1,7 +1,7 @@
-POST http://51.38.185.29:5000/api/post-items
+POST http://192.168.1.111:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "title": "Test Title",
-  "description": "Test Description"
+    "email": "rostand@gmail.com",
+    "password": "helloworld"
 }
