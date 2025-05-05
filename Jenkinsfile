@@ -36,7 +36,7 @@ pipeline {
                 sh 'npm test -- --passWithNoTests' // or other test command
             }
         }
-        state('Check Coverage') {
+        stage('Check Coverage') {
             steps {
                script {
                     // Assuming coverage is stored in coverage/coverage-summary.json
