@@ -48,6 +48,7 @@ pipeline {
                     if (totalCoverage < env.COVERAGE_THRESHOLD.toInteger()) {
                         error "Code coverage is below the threshold: ${totalCoverage}%"
                     }
+               }
             }
         }
     }
