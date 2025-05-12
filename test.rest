@@ -1,4 +1,4 @@
-POST http://51.38.185.29:5000/api/auth/signup
+POST http://51.38.185.29:5000/api/mark-item
 Content-Type: application/json
 
 {

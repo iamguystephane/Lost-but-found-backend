@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Item = require("../models/Item");
-const auth = require('../middleware/auth');
+const auth = require("../middleware/auth");
 
 router.put("/mark-item", auth, async (req, res) => {
   try {
@@ -14,7 +14,8 @@ router.put("/mark-item", auth, async (req, res) => {
     await item.save();
     res.status(200).json({ message: "Item status updated successfully" });
   } catch (err) {
-    console.log("Error marking item: ", err);
+    console.error("Error marking item:", err);
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 
