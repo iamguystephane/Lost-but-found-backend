@@ -1,7 +1,7 @@
-POST http://51.38.185.29:5000/api/mark-item
+POST http://51.38.185.29:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "rostand@gmail.com",
+    "email": "gstephane@gmail.com",
     "password": "helloworld"
 }
