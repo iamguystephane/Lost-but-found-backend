@@ -15,6 +15,7 @@ app.use("/api", require("./routes/loggedinUser"));
 app.use("/api", require("./routes/get-lost-items"));
 app.use("/api", require("./routes/get-user-items"));
 app.use("/api", require("./routes/post-items"));
+app.use('/api', require("./routes/mark-item"));
 app.get("/api", (req, res) => res.send("<h1> Found me </h1>"));
 
 app.get("/", (req, res) => {

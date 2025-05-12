@@ -1,4 +1,4 @@
-POST http://192.168.1.111:5000/api/auth/login
+POST http://51.38.185.29:5000/api/auth/signup
 Content-Type: application/json
 
 {
